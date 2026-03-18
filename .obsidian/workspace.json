@@ -1,0 +1,253 @@
+{
+  "main": {
+    "id": "d50e522b1095ce7f",
+    "type": "split",
+    "children": [
+      {
+        "id": "ce8e7fbf97504df7",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "7890ecfc5464ba71",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "ACM/并查集.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "并查集"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "ce07ae3ba2dd9b3d",
+    "type": "split",
+    "children": [
+      {
+        "id": "6552116d3ed2c5f8",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "325dcc8c845aa11e",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "文件列表"
+            }
+          },
+          {
+            "id": "19ddb8a13b58779d",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "[\"标签\"]",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "搜索"
+            }
+          },
+          {
+            "id": "7943ef344706361f",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "书签"
+            }
+          }
+        ],
+        "currentTab": 2
+      }
+    ],
+    "direction": "horizontal",
+    "width": 255.5
+  },
+  "right": {
+    "id": "4456d0f90fb9d0ec",
+    "type": "split",
+    "children": [
+      {
+        "id": "f2ec52d3bf1df4b7",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "f1d085c2718cdad2",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "ACM/并查集.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "并查集 的反向链接列表"
+            }
+          },
+          {
+            "id": "b8769b79932db1a9",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "ACM/并查集.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "并查集 的出链列表"
+            }
+          },
+          {
+            "id": "519d10dc760c2ca0",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "标签"
+            }
+          },
+          {
+            "id": "bfca3d02566cdaa1",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "ACM/并查集.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "并查集 的大纲"
+            }
+          },
+          {
+            "id": "cb665bb462ef1884",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "添加笔记属性"
+            }
+          },
+          {
+            "id": "60dadce93bd0baeb",
+            "type": "leaf",
+            "state": {
+              "type": "file-properties",
+              "state": {
+                "file": "ACM/并查集.md"
+              },
+              "icon": "lucide-info",
+              "title": "并查集的笔记属性"
+            }
+          },
+          {
+            "id": "91fdabdc1445c9b4",
+            "type": "leaf",
+            "state": {
+              "type": "git-view",
+              "state": {},
+              "icon": "git-pull-request",
+              "title": "Source Control"
+            }
+          }
+        ],
+        "currentTab": 6
+      }
+    ],
+    "direction": "horizontal",
+    "width": 477.5
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "obsidian-git:Open Git source control": false,
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false,
+      "bases:新建数据库": false,
+      "obsidian-importer:Open Importer": false
+    }
+  },
+  "active": "91fdabdc1445c9b4",
+  "lastOpenFiles": [
+    "ACM/差分约束.md",
+    "ACM/动态规划基础2.md",
+    "ACM/动态规划基础.md",
+    "ACM/基本语法.md",
+    "ACM/线段树.md",
+    "ACM/搜索图论基础.md",
+    "ACM/数论基础.md",
+    "ACM/树堆 Treap.md",
+    "ACM/基础算法.md",
+    "ACM/BFS进阶.md",
+    "ACM/src/QQ_1736588614600.png",
+    "ACM/src/QQ_1736320523799.png",
+    "ACM/src/QQ_1733483967933.png",
+    "ACM/src/QQ_1736231055989.png",
+    "ACM/src/QQ_1733484407072.png",
+    "ACM/src/QQ_1730378712510.png",
+    "ACM/src/QQ_1730869853528.png",
+    "ACM/src/QQ_1732807580244.png",
+    "ACM/src/image 4.png",
+    "ACM/src/IMG_4728.jpeg",
+    "ACM/DFS进阶.md",
+    "ACM/ST 表.md",
+    "ACM/src",
+    "ACM/并查集.md",
+    "ACM/笔记.md",
+    "ACM/树状数组.md",
+    "ACM/数据结构基础.md",
+    "ACM/数论.md",
+    "ACM/贪心基础.md",
+    "ACM/待做题单.md",
+    "ACM/连通性.md",
+    "ACM/时空复杂度.md",
+    "ACM/可持久化.md",
+    "Notion/笔记",
+    "ACM",
+    "欢迎.md",
+    "未命名.canvas",
+    "创建链接.md",
+    "2026-03-18.md"
+  ]
+}
