@@ -1,8 +1,6 @@
 ---
 标签:
   - 数据结构
-难度:
-  - ★★
 ---
   
 > [OI Wiki - Treap](https://oi-wiki.org/ds/treap/)  

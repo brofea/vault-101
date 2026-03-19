@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "96aa62e2bdb5a6af",
+        "id": "c35ef448b3d7fc78",
         "type": "tabs",
         "children": [
           {
-            "id": "51fc48836a80f75f",
+            "id": "0906370ad433ad0b",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "README.md",
+                "file": "CS/数据库系统/数据库导论.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "README"
+              "title": "数据库导论"
             }
           }
         ]
@@ -53,7 +53,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "[\"标签\"]",
+                "query": "[\"tags\"]",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -109,13 +109,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "README.md",
+                "file": "CS/数据库系统/数据库导论.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "README 的大纲"
+              "title": "数据库导论 的大纲"
             }
           },
           {
@@ -130,6 +130,18 @@
               },
               "icon": "lucide-archive",
               "title": "添加笔记属性"
+            }
+          },
+          {
+            "id": "60dadce93bd0baeb",
+            "type": "leaf",
+            "state": {
+              "type": "file-properties",
+              "state": {
+                "file": "CS/数据库系统/数据库导论.md"
+              },
+              "icon": "lucide-info",
+              "title": "数据库导论的笔记属性"
             }
           }
         ],
@@ -150,24 +162,12 @@
             }
           },
           {
-            "id": "60dadce93bd0baeb",
-            "type": "leaf",
-            "state": {
-              "type": "file-properties",
-              "state": {
-                "file": "ACM/动态规划基础.md"
-              },
-              "icon": "lucide-info",
-              "title": "动态规划基础的笔记属性"
-            }
-          },
-          {
             "id": "f1d085c2718cdad2",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
-                "file": "README.md",
+                "file": "CS/数据库系统/数据库导论.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -177,7 +177,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "README 的反向链接列表"
+              "title": "数据库导论 的反向链接列表"
             }
           },
           {
@@ -194,7 +194,8 @@
               "title": "动态规划基础 的出链列表"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -209,29 +210,48 @@
       "daily-notes:打开/创建今天的日记": false,
       "templates:插入模板": false,
       "command-palette:打开命令面板": false,
-      "bases:新建数据库": false,
-      "obsidian-importer:Open Importer": false
+      "bases:新建数据库": false
     }
   },
-  "active": "51fc48836a80f75f",
+  "active": "0906370ad433ad0b",
   "lastOpenFiles": [
-    "FUTURE.md",
+    "CS/数据库系统/SQL 入门.md",
+    "CS/数据库系统/数据库导论.md",
+    "未命名.base",
     "README.md",
-    "ACM/基础算法.md",
-    "ACM/数据结构基础.md",
-    "ACM/动态规划基础.md",
-    "。vscode",
-    "ACM/差分约束.md",
-    "ACM/并查集.md",
-    "ACM/时空复杂度.md",
-    "().md",
-    "ACM/动态规划基础2.md",
-    "ACM/基本语法.md",
-    "ACM/线段树.md",
-    "ACM/搜索图论基础.md",
-    "ACM/数论基础.md",
-    "ACM/树堆 Treap.md",
-    "ACM/BFS进阶.md",
+    "CS/数据库系统",
+    "CS/计算机网络",
+    "CS/操作系统",
+    "CS/未命名/未命名",
+    "CS/计算机组成原理",
+    "CS",
+    "ACM/数据结构/并查集.md",
+    "ACM/数据结构/可持久化.md",
+    "ACM/数据结构/树堆 Treap.md",
+    "ACM/数据结构/数据结构基础.md",
+    "ACM/数据结构/线段树.md",
+    "ACM/数据结构/ST 表.md",
+    "ACM/数据结构",
+    "ACM/数学",
+    "ACM/图论/图论基础.md",
+    "ACM/搜索/搜索基础.md",
+    "ACM/搜索/BFS进阶.md",
+    "ACM/搜索/DFS进阶.md",
+    "ACM/图论/连通性.md",
+    "ACM/搜索",
+    "ACM/_ACM.md",
+    "ACM/算法基础/贪心基础.md",
+    "ACM/动态规划/动态规划基础.md",
+    "ACM/语言基础/基本语法.md",
+    "未命名.canvas",
+    "ACM/算法基础/时空复杂度.md",
+    "ACM/图论/差分约束.md",
+    "ACM/数学/数学基础.md",
+    "ACM/算法基础/基础算法.md",
+    "ACM/数据结构/树状数组.md",
+    "Java.md",
+    "FUTURE.md",
+    "ACM/动态规划/动态规划基础2.md",
     "ACM/assets/QQ_1736588614600.png",
     "ACM/assets/QQ_1736320523799.png",
     "ACM/assets/QQ_1733483967933.png",
@@ -241,19 +261,6 @@
     "ACM/assets/QQ_1730869853528.png",
     "ACM/assets/QQ_1732807580244.png",
     "ACM/assets/image 4.png",
-    "ACM/assets/IMG_4728.jpeg",
-    "ACM/DFS进阶.md",
-    "ACM/ST 表.md",
-    "ACM/assets",
-    "ACM/笔记.md",
-    "ACM/树状数组.md",
-    "ACM/数论.md",
-    "ACM/贪心基础.md",
-    "ACM/待做题单.md",
-    "ACM/连通性.md",
-    "ACM/可持久化.md",
-    "Notion/笔记",
-    "ACM",
-    "未命名.canvas"
+    "ACM/assets/IMG_4728.jpeg"
   ]
 }
