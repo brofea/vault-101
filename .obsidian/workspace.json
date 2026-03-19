@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "ce8e7fbf97504df7",
+        "id": "96aa62e2bdb5a6af",
         "type": "tabs",
         "children": [
           {
-            "id": "7890ecfc5464ba71",
+            "id": "51fc48836a80f75f",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "ACM/并查集.md",
+                "file": "ACM/时空复杂度.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "并查集"
+              "title": "时空复杂度"
             }
           }
         ]
@@ -74,8 +74,7 @@
               "title": "书签"
             }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "horizontal",
@@ -89,39 +88,6 @@
         "id": "f2ec52d3bf1df4b7",
         "type": "tabs",
         "children": [
-          {
-            "id": "f1d085c2718cdad2",
-            "type": "leaf",
-            "state": {
-              "type": "backlink",
-              "state": {
-                "file": "ACM/并查集.md",
-                "collapseAll": false,
-                "extraContext": false,
-                "sortOrder": "alphabetical",
-                "showSearch": false,
-                "searchQuery": "",
-                "backlinkCollapsed": false,
-                "unlinkedCollapsed": true
-              },
-              "icon": "links-coming-in",
-              "title": "并查集 的反向链接列表"
-            }
-          },
-          {
-            "id": "b8769b79932db1a9",
-            "type": "leaf",
-            "state": {
-              "type": "outgoing-link",
-              "state": {
-                "file": "ACM/并查集.md",
-                "linksCollapsed": false,
-                "unlinkedCollapsed": true
-              },
-              "icon": "links-going-out",
-              "title": "并查集 的出链列表"
-            }
-          },
           {
             "id": "519d10dc760c2ca0",
             "type": "leaf",
@@ -143,13 +109,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "ACM/并查集.md",
+                "file": "ACM/时空复杂度.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "并查集 的大纲"
+              "title": "时空复杂度 的大纲"
             }
           },
           {
@@ -165,19 +131,14 @@
               "icon": "lucide-archive",
               "title": "添加笔记属性"
             }
-          },
-          {
-            "id": "60dadce93bd0baeb",
-            "type": "leaf",
-            "state": {
-              "type": "file-properties",
-              "state": {
-                "file": "ACM/并查集.md"
-              },
-              "icon": "lucide-info",
-              "title": "并查集的笔记属性"
-            }
-          },
+          }
+        ],
+        "currentTab": 1
+      },
+      {
+        "id": "2ac9a3322f6288a6",
+        "type": "tabs",
+        "children": [
           {
             "id": "91fdabdc1445c9b4",
             "type": "leaf",
@@ -187,13 +148,57 @@
               "icon": "git-pull-request",
               "title": "Source Control"
             }
+          },
+          {
+            "id": "60dadce93bd0baeb",
+            "type": "leaf",
+            "state": {
+              "type": "file-properties",
+              "state": {
+                "file": "ACM/时空复杂度.md"
+              },
+              "icon": "lucide-info",
+              "title": "时空复杂度的笔记属性"
+            }
+          },
+          {
+            "id": "f1d085c2718cdad2",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "README.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "README 的反向链接列表"
+            }
+          },
+          {
+            "id": "b8769b79932db1a9",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "ACM/时空复杂度.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "时空复杂度 的出链列表"
+            }
           }
-        ],
-        "currentTab": 6
+        ]
       }
     ],
     "direction": "horizontal",
-    "width": 477.5
+    "width": 329.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -208,8 +213,13 @@
       "obsidian-importer:Open Importer": false
     }
   },
-  "active": "91fdabdc1445c9b4",
+  "active": "51fc48836a80f75f",
   "lastOpenFiles": [
+    "ACM/时空复杂度.md",
+    "().md",
+    "README.md",
+    "FUTURE.md",
+    "ACM/并查集.md",
     "ACM/差分约束.md",
     "ACM/动态规划基础2.md",
     "ACM/动态规划基础.md",
@@ -233,7 +243,6 @@
     "ACM/DFS进阶.md",
     "ACM/ST 表.md",
     "ACM/src",
-    "ACM/并查集.md",
     "ACM/笔记.md",
     "ACM/树状数组.md",
     "ACM/数据结构基础.md",
@@ -241,13 +250,10 @@
     "ACM/贪心基础.md",
     "ACM/待做题单.md",
     "ACM/连通性.md",
-    "ACM/时空复杂度.md",
     "ACM/可持久化.md",
     "Notion/笔记",
     "ACM",
     "欢迎.md",
-    "未命名.canvas",
-    "创建链接.md",
-    "2026-03-18.md"
+    "未命名.canvas"
   ]
 }
