@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "ACM/基础算法.md",
+                "file": "README.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "基础算法"
+              "title": "README"
             }
           }
         ]
@@ -109,13 +109,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "ACM/基础算法.md",
+                "file": "README.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "基础算法 的大纲"
+              "title": "README 的大纲"
             }
           },
           {
@@ -213,8 +213,11 @@
       "obsidian-importer:Open Importer": false
     }
   },
-  "active": "325dcc8c845aa11e",
+  "active": "51fc48836a80f75f",
   "lastOpenFiles": [
+    "FUTURE.md",
+    "README.md",
+    "ACM/基础算法.md",
     "ACM/数据结构基础.md",
     "ACM/动态规划基础.md",
     "。vscode",
@@ -222,15 +225,12 @@
     "ACM/并查集.md",
     "ACM/时空复杂度.md",
     "().md",
-    "README.md",
-    "FUTURE.md",
     "ACM/动态规划基础2.md",
     "ACM/基本语法.md",
     "ACM/线段树.md",
     "ACM/搜索图论基础.md",
     "ACM/数论基础.md",
     "ACM/树堆 Treap.md",
-    "ACM/基础算法.md",
     "ACM/BFS进阶.md",
     "ACM/assets/QQ_1736588614600.png",
     "ACM/assets/QQ_1736320523799.png",
