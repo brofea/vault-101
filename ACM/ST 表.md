@@ -6,9 +6,7 @@
 ---
 # 什么是 ST 表
 
-> [!info] ST 表 - OI Wiki  
-> OI Wiki 是一个编程竞赛知识整合站点，提供有趣又实用的编程竞赛知识以及其他有帮助的内容，帮助广大编程竞赛爱好者更快更深入地学习编程竞赛  
-> [https://oi-wiki.org/ds/sparse-table/](https://oi-wiki.org/ds/sparse-table/)  
+> [OI Wiki - ST 表](https://oi-wiki.org/ds/sparse-table/)  
 
 > ST 表（Sparse Table，稀疏表）是用于解决 **可重复贡献问题** 的数据结构。
 
@@ -52,9 +50,8 @@ for (int i = 1; i <= n; i++)
 
 ## 模板题
 
-> [!info] P3865 【模板】ST 表 && RMQ 问题  
+> [落谷 - P3865 【模板】ST 表 && RMQ 问题](https://www.luogu.com.cn/problem/P3865)  
 > 这是一道 ST 表经典题——静态区间最大值 请注意最大数据时限只有 0.  
-> [https://www.luogu.com.cn/problem/P3865](https://www.luogu.com.cn/problem/P3865)  
 
 - 数据强度很大，必须将 `endl` 换成 `‘\n’` 或者改用 scanf 和 printf
 

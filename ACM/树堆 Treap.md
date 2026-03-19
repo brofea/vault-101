@@ -4,9 +4,8 @@
 难度:
   - ★★
 ---
-> [!info] Treap - OI Wiki  
-> OI Wiki 是一个编程竞赛知识整合站点，提供有趣又实用的编程竞赛知识以及其他有帮助的内容，帮助广大编程竞赛爱好者更快更深入地学习编程竞赛  
-> [https://oi-wiki.org/ds/treap/](https://oi-wiki.org/ds/treap/)  
+  
+> [OI Wiki - Treap](https://oi-wiki.org/ds/treap/)  
 
 # **二叉搜索树**
 

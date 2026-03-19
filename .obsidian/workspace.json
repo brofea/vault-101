@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "ACM/时空复杂度.md",
+                "file": "ACM/基础算法.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "时空复杂度"
+              "title": "基础算法"
             }
           }
         ]
@@ -109,13 +109,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "ACM/时空复杂度.md",
+                "file": "ACM/基础算法.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "时空复杂度 的大纲"
+              "title": "基础算法 的大纲"
             }
           },
           {
@@ -155,10 +155,10 @@
             "state": {
               "type": "file-properties",
               "state": {
-                "file": "ACM/时空复杂度.md"
+                "file": "ACM/动态规划基础.md"
               },
               "icon": "lucide-info",
-              "title": "时空复杂度的笔记属性"
+              "title": "动态规划基础的笔记属性"
             }
           },
           {
@@ -186,12 +186,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "ACM/时空复杂度.md",
+                "file": "ACM/动态规划基础.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "时空复杂度 的出链列表"
+              "title": "动态规划基础 的出链列表"
             }
           }
         ]
@@ -213,16 +213,18 @@
       "obsidian-importer:Open Importer": false
     }
   },
-  "active": "51fc48836a80f75f",
+  "active": "325dcc8c845aa11e",
   "lastOpenFiles": [
+    "ACM/数据结构基础.md",
+    "ACM/动态规划基础.md",
+    "。vscode",
+    "ACM/差分约束.md",
+    "ACM/并查集.md",
     "ACM/时空复杂度.md",
     "().md",
     "README.md",
     "FUTURE.md",
-    "ACM/并查集.md",
-    "ACM/差分约束.md",
     "ACM/动态规划基础2.md",
-    "ACM/动态规划基础.md",
     "ACM/基本语法.md",
     "ACM/线段树.md",
     "ACM/搜索图论基础.md",
@@ -230,22 +232,21 @@
     "ACM/树堆 Treap.md",
     "ACM/基础算法.md",
     "ACM/BFS进阶.md",
-    "ACM/src/QQ_1736588614600.png",
-    "ACM/src/QQ_1736320523799.png",
-    "ACM/src/QQ_1733483967933.png",
-    "ACM/src/QQ_1736231055989.png",
-    "ACM/src/QQ_1733484407072.png",
-    "ACM/src/QQ_1730378712510.png",
-    "ACM/src/QQ_1730869853528.png",
-    "ACM/src/QQ_1732807580244.png",
-    "ACM/src/image 4.png",
-    "ACM/src/IMG_4728.jpeg",
+    "ACM/assets/QQ_1736588614600.png",
+    "ACM/assets/QQ_1736320523799.png",
+    "ACM/assets/QQ_1733483967933.png",
+    "ACM/assets/QQ_1736231055989.png",
+    "ACM/assets/QQ_1733484407072.png",
+    "ACM/assets/QQ_1730378712510.png",
+    "ACM/assets/QQ_1730869853528.png",
+    "ACM/assets/QQ_1732807580244.png",
+    "ACM/assets/image 4.png",
+    "ACM/assets/IMG_4728.jpeg",
     "ACM/DFS进阶.md",
     "ACM/ST 表.md",
-    "ACM/src",
+    "ACM/assets",
     "ACM/笔记.md",
     "ACM/树状数组.md",
-    "ACM/数据结构基础.md",
     "ACM/数论.md",
     "ACM/贪心基础.md",
     "ACM/待做题单.md",
@@ -253,7 +254,6 @@
     "ACM/可持久化.md",
     "Notion/笔记",
     "ACM",
-    "欢迎.md",
     "未命名.canvas"
   ]
 }
