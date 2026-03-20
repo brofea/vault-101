@@ -2,6 +2,9 @@
   "recommendations": [
     "davidanson.vscode-markdownlint",
     "wakatime.vscode-wakatime",
-    "yzhang.markdown-all-in-one"
+    "yzhang.markdown-all-in-one",
+    "hnw.vscode-auto-open-markdown-preview",
+    "tomoki1207.pdf",
+    "myriad-dreamin.tinymist",
   ]
 }

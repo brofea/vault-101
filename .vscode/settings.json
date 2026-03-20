@@ -1,0 +1,4 @@
+{
+    "clang-format.fallbackStyle": "Google",
+    "markdown-code-block-formatter.defaultLanguage": "cpp"
+}
