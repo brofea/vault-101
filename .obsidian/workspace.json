@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "CS/数据库系统/数据库导论.md",
+                "file": "CS/计算机组成原理/1计算机系统概述.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "数据库导论"
+              "title": "1计算机系统概述"
             }
           }
         ]
@@ -109,13 +109,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CS/数据库系统/数据库导论.md",
+                "file": "CS/计算机组成原理/1计算机系统概述.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "数据库导论 的大纲"
+              "title": "1计算机系统概述 的大纲"
             }
           },
           {
@@ -167,7 +167,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "CS/数据库系统/数据库导论.md",
+                "file": "CS/计算机组成原理/1计算机系统概述.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -177,7 +177,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "数据库导论 的反向链接列表"
+              "title": "1计算机系统概述 的反向链接列表"
             }
           },
           {
@@ -215,8 +215,14 @@
   },
   "active": "0906370ad433ad0b",
   "lastOpenFiles": [
-    "CS/数据库系统/SQL 入门.md",
+    "CS/assets/cover4791_20260317085549.jpg",
+    "CS/assets/cover4790_20260317085548.jpg",
+    "CS/assets/cover4789_20260317085548.jpg",
+    "CS/assets/cover4788_20260317085548.jpg",
+    "ACM/图论/差分约束.md",
+    "CS/assets",
     "CS/数据库系统/数据库导论.md",
+    "CS/数据库系统/SQL 入门.md",
     "未命名.base",
     "README.md",
     "CS/数据库系统",
@@ -238,29 +244,23 @@
     "ACM/搜索/BFS进阶.md",
     "ACM/搜索/DFS进阶.md",
     "ACM/图论/连通性.md",
-    "ACM/搜索",
     "ACM/_ACM.md",
     "ACM/算法基础/贪心基础.md",
     "ACM/动态规划/动态规划基础.md",
     "ACM/语言基础/基本语法.md",
     "未命名.canvas",
     "ACM/算法基础/时空复杂度.md",
-    "ACM/图论/差分约束.md",
     "ACM/数学/数学基础.md",
     "ACM/算法基础/基础算法.md",
     "ACM/数据结构/树状数组.md",
     "Java.md",
     "FUTURE.md",
-    "ACM/动态规划/动态规划基础2.md",
     "ACM/assets/QQ_1736588614600.png",
     "ACM/assets/QQ_1736320523799.png",
     "ACM/assets/QQ_1733483967933.png",
     "ACM/assets/QQ_1736231055989.png",
     "ACM/assets/QQ_1733484407072.png",
     "ACM/assets/QQ_1730378712510.png",
-    "ACM/assets/QQ_1730869853528.png",
-    "ACM/assets/QQ_1732807580244.png",
-    "ACM/assets/image 4.png",
-    "ACM/assets/IMG_4728.jpeg"
+    "ACM/assets/QQ_1730869853528.png"
   ]
 }
