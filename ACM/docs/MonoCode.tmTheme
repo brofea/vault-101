@@ -1,30 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
     <key>name</key>
     <string>Black Text Only</string>
     <key>settings</key>
     <array>
-        <!-- 默认文本：黑色，无背景 -->
+        <!-- 默认文本 -->
         <dict>
             <key>settings</key>
             <dict>
                 <key>foreground</key>
-                <string>#000000</string> <!-- 纯黑 -->
+                <string>#000000</string>
                 <key>background</key>
-                <string>#FFFFFF</string> <!-- 纯白 -->
-                <key>fontStyle</key>
-                <string></string> <!-- 默认正常 -->
+                <string>#FFFFFF</string>
             </dict>
         </dict>
 
-        <!-- 关键字（if, else, for, return 等）：加粗 -->
+        <!-- 关键字 -->
         <dict>
             <key>name</key>
             <string>Keyword</string>
             <key>scope</key>
-            <string>keyword.control, keyword.operator, keyword.other</string>
+            <string>keyword.control, keyword.other</string>
             <key>settings</key>
             <dict>
                 <key>fontStyle</key>
@@ -32,33 +29,7 @@
             </dict>
         </dict>
 
-        <!-- 注释：斜体 -->
-        <dict>
-            <key>name</key>
-            <string>Comment</string>
-            <key>scope</key>
-            <string>comment.line, comment.block</string>
-            <key>settings</key>
-            <dict>
-                <key>fontStyle</key>
-                <string>italic</string>
-            </dict>
-        </dict>
-
-        <!-- 字符串：保持黑色，不加粗 -->
-        <dict>
-            <key>name</key>
-            <string>String</string>
-            <key>scope</key>
-            <string>string</string>
-            <key>settings</key>
-            <dict>
-                <key>fontStyle</key>
-                <string></string>
-            </dict>
-        </dict>
-
-        <!-- 函数名：加粗 -->
+        <!-- 函数名 -->
         <dict>
             <key>name</key>
             <string>Function</string>
@@ -71,7 +42,7 @@
             </dict>
         </dict>
 
-        <!-- 变量名：保持正常 -->
+        <!-- 变量名 -->
         <dict>
             <key>name</key>
             <string>Variable</string>
@@ -80,10 +51,38 @@
             <key>settings</key>
             <dict>
                 <key>fontStyle</key>
-                <string></string>
+                <string>bold</string>
             </dict>
         </dict>
-				
+
+        <!-- 符号 -->
+        <dict>
+            <key>name</key>
+            <string>Punctuation</string>
+            <key>scope</key>
+            <string>punctuation</string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#4D4D4D</string>
+            </dict>
+        </dict>
+
+        <!-- 注释 -->
+        <dict>
+            <key>name</key>
+            <string>Comment</string>
+            <key>scope</key>
+            <string>comment.line, comment.block</string>
+            <key>settings</key>
+            <dict>
+                <key>fontStyle</key>
+                <string>italic</string>
+                <key>foreground</key>
+                <string>#A0A0A0</string>
+            </dict>
+        </dict>
+
     </array>
 </dict>
 </plist>
