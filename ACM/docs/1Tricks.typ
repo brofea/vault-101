@@ -159,11 +159,14 @@ find(int x)                      // 查找 x，返回迭代器，没找到返回
 count(int x)                     // 返回 x 的个数
 erase(int x)                     // 删除所有 x
 
-// map/multimap
+// map / multimap
 insert(PII x)                      // 插入键值对 x
 erase(PII x)                       // 删除键值对 x
 find(int x)                        // 查找键 x，返回迭代器，没找到返回 end()
 // unordered 系类似，但不支持迭代器和二分查找
+
+// multimap / multiset
+equal_range(x)             // 返回一个 pair<iter, iter>，指向键为 x 的开始和结束位置
 ```
 
 数据结构

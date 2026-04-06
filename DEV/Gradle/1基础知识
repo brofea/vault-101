@@ -1,0 +1,313 @@
+# Gradle 基础知识
+
+本文是文档 [Gradle 用户手册 入门](https://docs.gradle.org.cn/current/userguide/getting_started_eng.html) 的学习笔记
+
+![Gradle 核心概念](assets/concepts.png)
+
+## 项目结构
+
+```text
+project
+├── gradle                          
+│   ├── libs.versions.toml      管理依赖版本         
+│   └── wrapper                 wrapper文件
+│       ├── gradle-wrapper.jar
+│       └── gradle-wrapper.properties
+├── gradlew                     wrapper脚本
+├── gradlew.bat                 wrapper脚本 (win)
+├── settings.gradle(.kts)       设置文件   
+├── subproject-a                子项目文件夹
+│   ├── build.gradle(.kts)      构建脚本
+│   └── src                     项目源代码
+└── subproject-b
+    ├── build.gradle(.kts)              
+    └── src                         
+```
+
+区分下面二者
+
+- Plugins 通常指 Gradle 插件，通常是对构建过程进行功能扩展，比如 Spring Boot 插件、打包 APK 的插件
+- Implementation 是项目依赖，就是代码中用的库
+
+## Wrapper 与 CLI 基础
+
+### Wrapper
+
+区分两种运行 Gradle 的方式
+
+- 使用系统安装的 Gradle 发行版 — 运行 gradle 命令
+- 使用 Gradle Wrapper — 运行 Gradle 项目中的脚本
+
+使用系统安装的发行版
+
+```bash
+gradle [taskName...] [--option-name...]
+```
+
+调用 Wrapper
+
+```bash
+./gradlew [taskName...] [--option-name...]
+```
+
+调用 Wrapper
+
+```bash
+gradlew.bat [taskName...] [--option-name...]
+```
+
+二者本质上是一样的，Gradle Wrapper 应该是首先考虑的
+
+除了上述的格式，gradle 命令还可以一次执行多个任务
+
+```bash
+gradle [taskName1 taskName2...] [--option-name...]
+```
+
+以下是一些常用的命令
+
+### 基础构建与任务查询
+
+`./gradlew tasks`：列出当前项目所有可用的任务
+
+`./gradlew build`：执行完整的构建过程。它会编译代码、运行测试并生成最后的制品（如 JAR 或 APK）
+
+`./gradlew clean`：删除 build 目录。当你觉得构建结果有缓存问题或者想从头开始时，先执行它
+
+`./gradlew assemble`：仅编译并打包，但不执行测试。这比 build 快很多
+
+### 项目运行与测试
+
+`./gradlew test`：运行所有的单元测试，并在 build/reports/tests 下生成 HTML 测试报告
+
+`./gradlew run`：如果你的项目是可执行的应用（如 Spring Boot 或 Java Main 程序），该任务会直接启动应用
+
+`./gradlew build -x test`：构建项目，但跳过测试（-x 表示 exclude）。紧急打包时常用
+
+### 依赖管理
+
+`./gradlew dependencies`：展示项目的依赖树。你可以看到每个库引入了哪些子依赖，以及是否存在版本冲突
+
+`./gradlew dependencyInsight --dependency <name>`：查看特定依赖的引入路径。例如，想知道 log4j 是被哪个库偷偷带进来的，就用这个
+
+`./gradlew build --refresh-dependencies`：强制刷新依赖。如果你的远程仓库更新了某个 Snapshot 版本但本地没更新，用这个
+
+### 调试参数
+
+`--info / --debug`：输出更详细的日志。报错信息不清楚时，加上这个（如 `./gradlew build --info`）
+
+`--stacktrace`：在报错时打印完整的堆栈信息，帮助定位脚本错误
+
+`--stop`：停止所有的 Gradle Daemon 守护进程。如果 Gradle 卡死了，这招通常管用
+
+`--scan`：生成一个网页版的 Build Scan 报告，非常直观地分析构建耗时和依赖问题
+
+## settings.gradle
+
+> 设置文件是一个脚本。它是一个用 Groovy 编写的 settings.gradle 文件，或一个用 Kotlin 编写的 settings.gradle.kts 文件。
+>
+> Groovy DSL 和 Kotlin DSL 是 Gradle 脚本唯一接受的语言
+
+这个文件是**项目启动阶段（Initialization Phase）**的核心配置文件。它决定了哪些模块会被纳入构建流程吗，以下三个核心板块的内容很重要
+
+### 项目命名 rootProject.name
+
+用于定义整个工程的名称。如果不定义，Gradle 默认会使用文件夹的名字
+
+```gradle
+rootProject.name = 'my-awesome-app'
+```
+
+### 模块管理 include
+
+单层级引入：
+
+```gradle
+include 'app', 'library', 'utils'
+```
+
+嵌套层级引入（常见于大型项目）：
+
+```gradle
+include 'services:user-service'
+include 'services:order-service'
+```
+
+> 这里的冒号代表路径分隔符，对应文件系统中的文件夹层级
+
+### 插件与仓库的集中管理
+
+在较新的 Gradle 版本中，官方推荐在 `settings.gradle` 中统一管理所有模块的插件来源和依赖仓库，而不是在每个 `build.gradle` 里重复写一遍
+
+内容有 `pluginManagement{}`，决定了脚本去哪里下载插件，还有 `dependencyResolutionManagement{}` 决定了项目里的库去哪里下载具体示例见后文
+
+---
+
+#### 集中定义版本号
+
+这是目前 **Gradle 官方最推荐** 的进阶写法。在 `settings.gradle` 中开启集中版本管理，可以避免在多个模块中手动同步版本号
+
+```gradle
+dependencyResolutionManagement {
+    versionCatalogs {
+        libs {
+            version('retrofit', '2.9.0')
+            library('retrofit-core', 'com.squareup.retrofit2', 'retrofit').versionRef('retrofit')
+        }
+    }
+}
+```
+
+这样在任何子模块的 `build.gradle` 中，你只需要写 `implementation libs.retrofit.core` 即可。
+
+---
+
+#### 一份 settings 模板
+
+```gradle
+// 1. 定义插件仓库
+pluginManagement {
+    repositories {
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+
+// 2. 定义全局依赖仓库
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        mavenCentral()
+    }
+}
+
+// 3. 项目名称和模块
+rootProject.name = 'MyProject'
+include ':app'
+include ':common-utils'
+```
+
+## build.gradle
+
+它决定了你的代码如何编译、需要哪些第三方库、以及最终打包成什么样，同样适用 Groovy DSL 和 Kotlin DSL 两种语言
+
+### 插件配置 plugins
+
+```gradle
+plugins {
+    id 'java'             // 基础 Java 支持
+    id 'org.springframework.boot' version '3.2.0' // 引入 Spring Boot 插件
+}
+```
+
+### 项目元信息 Metadata
+
+```gradle
+group = 'com.example'
+version = '1.0.0-SNAPSHOT'
+sourceCompatibility = '17' // 指定使用的 Java 版本
+```
+
+### 依赖管理 dependencies
+
+这是你添加各种“包”的地方。常见的指令有：
+
+- `implementation`: 最常用的，依赖只在当前模块内部可见。
+- `testImplementation`: 只在跑测试代码时才生效的依赖（如 JUnit）。
+- `api`: (需引入 `java-library` 插件) 允许依赖传递，其他引用本模块的项目也能使用这些包。
+
+```gradle
+dependencies {
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.0'
+}
+```
+
+### 仓库配置 repositories
+
+告诉 Gradle 去哪里下载上面写的那些包，如果在 `settings.gradle` 中配置了 `dependencyResolutionManagement`，这里通常可以省略
+
+### 自定义任务 tasks
+
+可以自己写逻辑来处理文件、打印日志等
+
+```gradle
+tasks.register('hello') {
+    doLast {
+        println 'Hello, Gradle!'
+    }
+}
+```
+
+### 一份 build 模板
+
+```gradle
+plugins {
+    id 'java'
+    id 'application' // 加上这个插件可以直接运行 main 方法
+}
+
+group = 'com.yourname'
+version = '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // 引入 Google 的 Guava 工具库作为例子
+    implementation 'com.google.guava:guava:31.1-jre'
+    // 测试框架
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
+}
+
+application {
+    // 指定你 main 方法所在的类
+    mainClass = 'com.yourname.Main'
+}
+
+test {
+    useJUnitPlatform() // 告诉 Gradle 使用 JUnit 5 运行测试
+}
+```
+
+Tips:
+
+- 分清 `implementation` 与 `compileOnly`：如果你只需要在编译时引用，不需要打入最终的包里，请务必用 `compileOnly`，可以减小产物大小
+- 避免使用 `+` 号指定版本：例如 `implementation 'com.xxx:xxx:+'`。这会导致每次构建都去查最新版，极其不稳定且难以复现 Bug
+- 单引号与双引号：在 Groovy 中，如果字符串里没有变量（如 `$version`），建议用单引号 `'`；如果有变量替换，必须用双引号 `"`
+
+## libs.versions.toml
+
+> 版本目录提供了一种集中且一致的方式来管理整个构建中的依赖坐标和版本。你无需在每个 build.gradle(.kts) 文件中直接声明版本，而是在 libs.versions.toml 文件中一次性定义它们。
+>
+> 这使得以下操作更容易：在子项目之间共享通用的依赖声明、避免重复和版本不一致、在大型项目中强制执行依赖和插件版本
+
+版本目录通常包含四个部分
+
+- [versions] 用于声明插件和库将引用的版本号。
+- [libraries] 用于定义构建文件中使用的库。
+- [bundles] 用于定义一组依赖。
+- [plugins] 用于定义插件。
+
+这是一个例子
+
+```toml
+[versions]
+guava = "32.1.2-jre"
+juneau = "8.2.0"
+
+[libraries]
+guava = { group = "com.google.guava", name = "guava", version.ref = "guava" }
+juneau-marshall = { group = "org.apache.juneau", name = "juneau-marshall", version.ref = "juneau" } 
+```
+
+定义后，你可以直接在构建文件中引用这些别名：
+
+```gradle
+dependencies {
+    implementation(libs.guava)
+    api(libs.juneau.marshall)
+} 
+```

@@ -403,37 +403,38 @@ for (int i = 1; i <= n1; i++) {
 ```
 == 联通性
 === Tarjan
+
+给定邻接表 e，求图中强连通分量的数量 scc_cnt，以及每个点所在的强连通分量编号 id
+
 ```cpp
-int h[N], e[M], ne[M], idx;     // 链式前向星
-// dfn 表示每个点的访问时间戳，low 表示每个点能访问到的最小时间戳
-int dfn[N], low[N], timestamp;
-int stk[N], top;
-bool in_stk[N];
-int id[N], scc_cnt; // 每个点所属分量编号
+vector<vector<int>> e;           // 邻接表
+int dfn[N], low[N], timestamp;   // 时间戳
+int id[N], scc_cnt;              // 强连通分量编号
+stack<int> stk; bool instk[N];   // 栈
 
 void tarjan(int u) {
-  // 访问当前节点 u，初始化其 dfn 和 low，将其入栈，标记已入栈
   dfn[u] = low[u] = ++timestamp;
-  stk[++top] = u, in_stk[u] = true;
-  // 遍历 u 的所有邻边 (u, j)
-  for (int i = h[u]; ~i; i = ne[i]) {
-    int j = e[i];
-    if (!dfn[j]) {                      // 如果 j 未访问，则递归访问，访问结束更新 low
-      tarjan(j);
-      low[u] = min(low[u], low[j]);
-    } else if (in_stk[j])               // 如果 j 已访问，且 j 在栈中，更新 low
-      low[u] = min(low[u], dfn[j]);
+  stk.push(u), instk[u] = true;
+
+  for (int v : e[u]) {
+    if (!dfn[v])
+      tarjan(v), low[u] = min(low[u], low[v]);
+    else if (instk[v])
+      low[u] = min(low[u], dfn[v]);
   }
-  // 若 u 是其所在强连通分量的根
-  // 循环出栈，标记出栈元素都为同一个强连通分量，直到 u 出栈
-  if (dfn[u] == low[u]) {
-    ++scc_cnt;
+  if (low[u] == dfn[u]) {
+    scc_cnt++;
     int y;
     do {
-      y = stk[top--];
-      in_stk[y] = false;
+      y = stk.top();
+      stk.pop();
+      instk[y] = false;
       id[y] = scc_cnt;
     } while (y != u);
   }
 }
+
+for (int i = 1; i <= n; ++i)
+  if (!dfn[i])
+    tarjan(i);
 ```
