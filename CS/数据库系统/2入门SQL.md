@@ -266,9 +266,13 @@ FROM 表名 AS 表别名;
 
 运算符包括：= 等于、<> 不等于、> 大于、< 小于、>= 大于等于、<= 小于等于、NOT 非、AND 并、OR 或，以及如下几个比较复杂的：
 
-- LIKE 用于模糊匹配，比如 `LIKE '%张%'`
+- LIKE 用于模糊匹配，比如 `LIKE '张%'`，其中 `%` 代表任意长度的字符串，`_` 代表单个字符，`[138]` 代表匹配 1、3、8 中的任意一个字符，`[^a-c]` 代表匹配除 a、b、c 以外的任意一个字符，`ESCAPE` 用于指定转义符，比如 `LIKE '100\%' ESCAPE '\'` 匹配以 "100%" 开头
 - IN 用于匹配列表中的值，比如 `IN (1, 2, 3)`
-- BETWEEN 范围查询，比如 `BETWEEN 10 AND 100`
+- BETWEEN 范围查询，比如 `BETWEEN 10 AND 100`，等价于 `>= 10 AND <= 100`
+- IS NULL 用于判断是否为 NULL，比如 `IS NULL` 或 `IS NOT NULL`
+- 括号用于分组或改变运算优先级，如 `(A AND B) OR C`，其中 A、B、C 是条件表达式
+
+在 SQL 中， `""`用于标识列名或表名，`''` 用于标识字符串常量，`[]` 用于标识列名或表名（SQL Server 中），反引号 `` 用于标识列名或表名（MySQL 中）
 
 例如 [LeetCode 1683. 无效的推文](https://leetcode.cn/problems/invalid-tweets/) 选择 content 长度大于 15 的推文 id
 
@@ -364,6 +368,8 @@ ORDER BY salary DESC, hire_date ASC;
 -- 按工资从高到低排序，如果工资一样，按入职时间先后排
 ```
 
+null 在排序中被认为是最大值，升序时排在最后，降序时排在最前
+
 ### LIMIT
 
 **LIMIT** 用于截取部分结果，语法如下
@@ -417,3 +423,63 @@ SQL Scalar Function 基于输入值，返回一个单一的值，例如：
 ### 窗口函数
 
 Window Functions
+
+## 综合例子
+
+### [LeetCode 570. 至少有5名直接下属的经理](https://leetcode.cn/problems/managers-with-at-least-5-direct-reports)
+
+一个 Employee 表，包含员工 ID、名字和自己的经理 ID，找出至少有 5 名直接下属的经理 ID 和名字
+
+首先找出经理 ID 列中出现过至少 5 次的经理 ID
+
+```sql
+SELECT e.managerId, COUNT(e.managerId) AS cnt 
+FROM Employee AS e
+WHERE e.managerId IS NOT NULL
+GROUP BY e.managerId
+HAVING COUNT(e.managerId) >= 5
+```
+
+然后将其与 Employee 表连接，找出经理的名字
+
+```sql
+SELECT ee.name
+FROM (
+    SELECT e.managerId, COUNT(e.managerId) AS cnt 
+    FROM Employee AS e
+    WHERE e.managerId IS NOT NULL
+    GROUP BY e.managerId
+    HAVING COUNT(e.managerId) >= 5
+) AS c 
+JOIN Employee AS ee
+ON ee.id = c.managerId
+```
+
+### [LeetCode 1251. 平均售价](https://leetcode.cn/problems/average-selling-price)
+
+一个 Prices 表，包含产品 ID、开始日期、结束日期和售价。一个 UnitsSold 表，包含产品 ID、日期和售出数量。找出每个产品的平均售价
+
+由于要找出每个产品，将 UnitsSold LEFT JOIN 至 Prices 表
+
+```sql
+SELECT *
+FROM Prices AS P
+LEFT JOIN UnitsSold AS U
+ON P.product_id = U.product_id
+AND U.purchase_date BETWEEN P.start_date AND P.end_date 
+```
+
+然后用 `SUM(A*B)/SUM(B)`  计算加权平均数，对于没有售出的产品，用 CASE WHEN 替换为 0，保留两位小数，最后按照 product_id 分组
+
+```sql
+SELECT P.product_id,
+    CASE 
+        WHEN SUM(U.units) = 0 OR SUM(U.units) IS NULL THEN 0.00
+        ELSE ROUND(SUM(P.price * U.units) * 1.0 / SUM(U.units), 2)
+    END AS average_price
+FROM Prices AS P
+LEFT JOIN UnitsSold AS U
+ON P.product_id = U.product_id
+AND U.purchase_date BETWEEN P.start_date AND P.end_date 
+GROUP BY P.product_id
+```
