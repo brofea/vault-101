@@ -267,7 +267,10 @@ FROM 表名 AS 表别名;
 运算符包括：= 等于、<> 不等于、> 大于、< 小于、>= 大于等于、<= 小于等于、NOT 非、AND 并、OR 或，以及如下几个比较复杂的：
 
 - LIKE 用于模糊匹配，比如 `LIKE '张%'`，其中 `%` 代表任意长度的字符串，`_` 代表单个字符，`[138]` 代表匹配 1、3、8 中的任意一个字符，`[^a-c]` 代表匹配除 a、b、c 以外的任意一个字符，`ESCAPE` 用于指定转义符，比如 `LIKE '100\%' ESCAPE '\'` 匹配以 "100%" 开头
-- IN 用于匹配列表中的值，比如 `IN (1, 2, 3)`
+- IN 用于匹配列表中的值，比如 `IN (1, 2, 3)`，或后接一个子查询
+- ANY 用于比较一个值与一个子查询返回的结果集中的任意一个值
+- ALL 用于比较一个值与一个子查询返回的结果集中的所有值
+- EXISTS 用于判断子查询是否返回至少一行数据，常用于相关子查询中
 - BETWEEN 范围查询，比如 `BETWEEN 10 AND 100`，等价于 `>= 10 AND <= 100`
 - IS NULL 用于判断是否为 NULL，比如 `IS NULL` 或 `IS NOT NULL`
 - 括号用于分组或改变运算优先级，如 `(A AND B) OR C`，其中 A、B、C 是条件表达式
@@ -379,6 +382,36 @@ LIMIT n           -- 只取前 n 条。
 LIMIT offset, n   -- 跳过前 offset 条，取接下来的 n 条。
 ```
 
+### 嵌套查询
+
+一个 SELECT FROM WHERE 被称为一个查询块，查询块可以嵌套在另一个查询块中，形成嵌套查询（Nested Query）或子查询（Subquery）
+
+子查询可出现在 SELECT、FROM、WHERE、JOIN、HAVING 子句中
+
+子查询分为相关子查询和非相关子查询，前者依赖于外部查询块中的列，需要外层传递参数，例如查询每个部门中工资最高的员工
+
+```sql
+SELECT name, dept_id, salary
+FROM Employees AS e1
+WHERE salary = (
+    SELECT MAX(salary) 
+    FROM Employees AS e2 
+    WHERE e2.dept_id = e1.dept_id
+        -- 这里引用了外层的 e1.dept_id
+);
+```
+
+上述代码的工作原理类似双重循环
+
+- 遍历 Employees 表中的每一行，记为 e1
+- 对于每一行 e1，执行子查询
+  - 子查询在 Employees 表中查找与 e1.dept_id 相同的行，记为 e2
+  - 在这些行中找到最大的 salary 值
+- 如果 e1 的 salary 等于子查询返回的最大 salary，则将 e1 的 name、dept_id 和 salary 包含在最终结果中
+
+可以看到，子查询对于 e1 每一行都会遍历一次 e2，效率很低，所以尽量避免使用相关子查询，改用 JOIN 或窗口函数等更高效的方式
+
+
 ## DCL & TCL 控制与事务语言
 
 用于管理权限、确保数据安全和事务处理
@@ -397,7 +430,7 @@ LIMIT offset, n   -- 跳过前 offset 条，取接下来的 n 条。
 
 ### 聚合函数
 
-SQL Aggregate Function 计算从列中取得的值，返回一个单一的值，例如：
+SQL Aggregate Function，参数为一列，返回一个单一的值
 
 - AVG() 返回平均值
 - COUNT() 返回行数
@@ -409,7 +442,7 @@ SQL Aggregate Function 计算从列中取得的值，返回一个单一的值，
 
 ### 标量函数
 
-SQL Scalar Function 基于输入值，返回一个单一的值，例如：
+SQL Scalar Function，参数为一个值，返回一个单一的值
 
 - UCASE() 将某个字段转换为大写
 - LCASE() 将某个字段转换为小写
@@ -422,7 +455,11 @@ SQL Scalar Function 基于输入值，返回一个单一的值，例如：
 
 ### 窗口函数
 
-Window Functions
+Window Functions，一个比较特殊的函数，它参照周边的关系返回一个值
+
+### 表值函数
+
+SQL Table-Valued Functions, TVF，输入参数为一个值，返回一个表格
 
 ## 综合例子
 
