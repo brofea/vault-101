@@ -143,6 +143,46 @@ CREATE INDEX 索引名称 ON 表名 (列1, 列2);
 
 其中次序为升序 ASC 或降序 DESC，默认是升序的不需要写 ASC
 
+### VIEW
+
+上面三种操作都没有提到视图，这里单独说明。视图是一个**虚拟表**，基于 SQL 查询定义，不存储数据，查询时动态计算，常用于简化复杂查询、提供数据安全和抽象数据层
+
+**CREATE VIEW** 用于创建视图，语法如下
+
+```sql
+CREATE VIEW 视图名称 (列名1, 列名2, ...) AS 
+<一个查询块，即 SELECT 语句>
+[WITH CHECK OPTION]
+```
+
+其中视图的列名可以省略，但以下情况下列名必须写出：
+
+- 存在聚合函数，除非有别名
+- 存在算术表达式或函数，除非有别名
+- 存在 JOIN 导致的列名重复
+
+WITH CHECK OPTION 选项用于确保通过视图进行的任何数据修改都必须满足视图定义的条件，否则会被拒绝。
+
+例如
+
+```sql
+CREATE VIEW ScoreA AS
+SELECT id, score
+FROM Scores
+WHERE score >= 90
+WITH CHECK OPTION
+```
+
+如果在上面的视图定义中存在 WITH CHECK OPTION，任何试图通过 ScoreA 视图插入或更新数据的操作都必须满足 score >= 90 的条件，否则将会失败
+
+如果视图有以下情况，不允许更新：
+
+- 由两个基本表连接而成
+- 字段是聚合函数、表达式或常数
+- 包含 DISTINCT、GROUP BY、HAVING 或 UNION 等子句
+- 包含子查询
+- 由不可更新的视图定义而成
+
 ## DML 数据操作语言
 
 Data Manipulation Language，对表里的**数据行**进行增、删、改
@@ -154,7 +194,8 @@ Data Manipulation Language，对表里的**数据行**进行增、删、改
 ```sql
 INSERT INTO 表名
 VALUES (值1, 值2, 值3);
--- 所有列均有值，不推荐
+-- 所有列均有值，可省略列名
+
 INSERT INTO 表名 (列名1, 列名2, 列名3) 
 VALUES (值1, 值2, 值3);
 -- 指定插入某些列
@@ -185,6 +226,8 @@ Tips:
 - VALUES 中的值可以为 NULL
 - 尽量不要选择省略列名的写法，鲁棒性差
 
+DBMS 会自动检测插入会不会违反目前表的完整性约束
+
 ### UPDATE
 
 **UPDATE** 用于更新表中已经存在的记录，语法如下
@@ -211,6 +254,8 @@ WHERE id = 101;
 DELETE FROM 表名
 WHERE 过滤条件;
 ```
+
+WHERE 子句的过滤条件等同 SELECT 语句中的 WHERE 子句
 
 **TRUNCATE** 用于清空整张表，实则是直接重建，速度会比 DELETE 快
 
@@ -259,6 +304,12 @@ SELECT 列名(s)
 FROM 表名 AS 表别名;
 -- 给表起别名
 ```
+
+### FROM
+
+**FROM** 后面可以跟一个表，也可以跟一个子查询块，甚至是多个表或子查询块
+
+当 FROM 后面跟多个表时，本质上是进行 CROSS JOIN（笛卡尔积），需要在 WHERE 子句中指定连接条件，否则会得到大量无意义的结果。这是一种旧式标准，如果忘记写 WHERE 子句，会得到一个巨大的笛卡尔积结果，但性能上和 JOIN 没有区别
 
 ### WHERE
 
@@ -409,8 +460,29 @@ WHERE salary = (
   - 在这些行中找到最大的 salary 值
 - 如果 e1 的 salary 等于子查询返回的最大 salary，则将 e1 的 name、dept_id 和 salary 包含在最终结果中
 
-可以看到，子查询对于 e1 每一行都会遍历一次 e2，效率很低，所以尽量避免使用相关子查询，改用 JOIN 或窗口函数等更高效的方式
+再举例一个，找出没有参与任何工作的员工，即找出不存在于至少参与了一个工作的员工表中的员工
 
+```sql
+SELECT name
+FROM Employees AS e
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM WorksOn AS w
+    WHERE w.emp_id = e.emp_id
+);
+```
+
+可以看到，子查询对于外层表每一行都会遍历一次内层表，效率很低，所以尽量避免使用相关子查询，改用 JOIN 或窗口函数等更高效的方式
+
+### UNION
+
+**UNION** 用于求两个查询结果的并集，要求两个表列数相同，列类型兼容，默认去重
+
+```sql
+SELECT 列名1, 列名2 FROM 表1
+UNION
+SELECT 列名1, 列名2 FROM 表2;
+```
 
 ## DCL & TCL 控制与事务语言
 
@@ -424,9 +496,36 @@ WHERE salary = (
   - ROLLBACK: 回滚（撤销刚才的操作，像按下 Ctrl+Z）
   - SAVEPOINT: 设置保存点
 
+### GRANT & REVOKE
+
+GRANT 用于赋予用户权限，语法如下
+
+```sql
+GRANT 权限类型 ON 对象 TO 用户
+[WITH GRANT OPTION]
+```
+
+权限类型包括 SELECT、INSERT、UPDATE、DELETE、ALL 等，WITH GRANT OPTION 允许被授权用户继续授权给其他用户
+
+REVOKE 用于收回权限，语法如下
+
+```sql
+REVOKE 权限类型 ON 对象 FROM 用户
+```
+
+## 控制流语句
+
+### CASE END
+
+类似于 Golang 中的 `switch case`，可以对某个值进行多重判断，也可以在 `CASE` 后写表达式
+
+```sql
+
+```
+
 ## SQL 函数
 
-按输入内容分为聚合函数和标量函数，聚合函数输入列，标量函数
+按输入内容分为聚合函数和标量函数，聚合函数输入列，标量函数输入一个值
 
 ### 聚合函数
 

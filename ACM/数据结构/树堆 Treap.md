@@ -1,11 +1,6 @@
----
-标签:
-  - 数据结构
----
-  
-> [OI Wiki - Treap](https://oi-wiki.org/ds/treap/)  
+# 二叉搜索树
 
-# **二叉搜索树**
+[OI Wiki - Treap](https://oi-wiki.org/ds/treap/)
 
 二叉搜索树（BST）的定义，对于任意一个节点
 

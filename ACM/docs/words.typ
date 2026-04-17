@@ -696,6 +696,8 @@ parity property	奇偶性
 
 partical order	偏序
 
+pairwise distinct	两两不相同的
+
 Pawn	禁卫军（兵）只能向前直走，每次只能走一格。但走第一步时，可以走一格或两格。兵的吃子方法与行棋方向不一样，它是直走斜吃，即如果兵的斜进一格内有对方棋子，就可以吃掉它而占据该格
 
 phyical structure	物理结构
