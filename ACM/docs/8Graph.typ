@@ -15,7 +15,6 @@ void add(int a, int b)
 // 记得初始化
 memset(h, -1, sizeof h);
 ```
-\
 *拓扑排序*
 ```cpp
 queue<int> q; // 所有0入度点
@@ -32,7 +31,6 @@ while(!q.empty()){
 }
 ```
 == 最短路
-\
 - 稠密图：朴素 Dijkstra $O(n^2)$
 - 稀疏图：堆优化 Dijkstra $O(m log n)$
 - 负边权：Bellman-Ford $O(n m)$

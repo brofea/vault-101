@@ -17,9 +17,7 @@
   lang: "zh",
   region: "CN",
   size: 11pt,
-  font: (
-    "Source Han Serif",
-  )
+  font: "Noto Serif CJK SC"
 )
 #set heading(
   numbering: "1."

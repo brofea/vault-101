@@ -2,8 +2,7 @@
 == 排序
 快速排序
 ```cpp
-void quick_sort(int q[], int l, int r)
-{
+void quick_sort(int q[], int l, int r) {
   if (l >= r) return;
   int i = l - 1, j = r + 1, x = q[(l + r) >> 1];
   // 随机选取q，用双指针法将将小于q的数放在q的左边，将大于q的数放在q右边
@@ -18,8 +17,7 @@ void quick_sort(int q[], int l, int r)
 ```
 归并排序
 ```cpp
-void merge_sort(int q[], int l, int r)
-{
+void merge_sort(int q[], int l, int r) {
   static int tmp[1000000]; // 临时数组
   if (l >= r) return;
   int mid = (l + r) >> 1;
@@ -39,8 +37,9 @@ void merge_sort(int q[], int l, int r)
 }
 ```
 == 二分查找
+
+寻找第一个满足 check 的值
 ```cpp
-// 寻找第一个满足 check 的值
 int bsearch_1(int l, int r) { 
   while (l < r) {
     int mid = (l + r) >> 1;
@@ -49,7 +48,9 @@ int bsearch_1(int l, int r) {
   }
   return l;
 }
-// 寻找最后一个满足 check 的值
+```
+寻找最后一个满足 check 的值
+```cpp
 int bsearch_2(int l, int r) {
   while (l < r) {
     int mid = (l + r + 1) >> 1;
@@ -60,6 +61,7 @@ int bsearch_2(int l, int r) {
 }
 ```
 == 高精度
+
 ```cpp
 // 高精加
 vector<int> add(vector<int> &A, vector<int> &B) {
