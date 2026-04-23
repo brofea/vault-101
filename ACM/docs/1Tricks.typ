@@ -95,17 +95,17 @@ round(p, (1.0/n))                               // p 的 n 次方根
 ```
 非方法 STL 函数
 ```cpp
-shuffle(v.begin(), v.end(), std::default_random_engine());  // 随机打乱
+shuffle(v.begin(), v.end(), default_random_engine());       // 随机打乱
 copy(v.begin(), v.end(), dest.begin());                     // 复制区间内的元素到 dest
 swap_ranges(v1.begin(), v1.end(), v2.begin());              // 交换等长区间内的元素
 reverse(v.begin(), v.end());                                // 反转区间内的元素
 replace(v.begin(), v.end(), a, b);                          // 替换区间内所有 a 为 b
 replace_if(v.begin(), v.end(), pred, b);    // 替换满足 pred 条件的值为 b, pred 是 bool 函数
 
-merge(a.begin(), a.end(), b.begin(), b.end(), result.begin());      // 合并两个有序区间
-set_union(a.begin(), a.end(), b.begin(), b.end(), result.begin());          // 取并集
-set_intersection(a.begin(), a.end(), b.begin(), b.end(), result.begin());   // 取交集
-set_difference(a.begin(), a.end(), b.begin(), b.end(), result.begin());     // 取差集
+merge(a.begin(), a.end(), b.begin(), b.end(), res.begin());      // 合并两个有序区间
+set_union(a.begin(), a.end(), b.begin(), b.end(), res.begin());          // 取并集
+set_intersection(a.begin(), a.end(), b.begin(), b.end(), res.begin());   // 取交集
+set_difference(a.begin(), a.end(), b.begin(), b.end(), res.begin());     // 取差集
 // 上述四个函数都可在末尾增加 comp 参数，comp 是一个 bool 类型的比较函数
 
 sort(v.begin(), v.end());                        // 升序
@@ -139,6 +139,10 @@ a.erase(unique(a.begin(), a.end()), a.end());
 sort(a, a + n);
 n = unique(a, a + n) - a;
 
+accumulate(v.begin(), v.end(), 0LL);              // 计算元素和，第三个是初始值且决定类型
+partial_sum(v.begin(), v.end(), res.begin());     // 计算前缀和，存入 res 中
+adjacent_difference(v.begin(), v.end(), res.begin()); // 计算差分，res[i]=v[i]-v[i-1]
+iota(v.begin(), v.end(), 1);                      // 从 1 开始连续填充
 
 ```
 == 容器和方法
