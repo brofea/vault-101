@@ -11,8 +11,7 @@
   region: "CN",
   size: 11pt,
   font: (
-    "Times New Roman",
-    "Songti SC",
+    "Source Han Serif SC",
   ),
 )
 #set par(
