@@ -3,34 +3,20 @@
 \
 *链式前向星*
 ```cpp
-// 如果是无向图 M 要乘 2
-int h[N], e[M], ne[M], idx = 0;
-// 添加一条边 a->b
-void add(int a, int b)
-{
+int h[N], e[M], ne[M], idx = 0;       // 如果是无向图 M 要乘 2
+void add(int a, int b) {              // 添加一条边 a->b
   e[idx] = b;
   ne[idx] = h[a];
   h[a] = idx++;
 }
-// 记得初始化
-memset(h, -1, sizeof h);
+memset(h, -1, sizeof h);              // 记得初始化
 ```
 *拓扑排序*
-```cpp
-queue<int> q; // 所有0入度点
-vector<int> topo; // 拓扑序答案
-while(!q.empty()){
-	int tmp = q.front();
-	topo.push_back(tmp);
-	q.pop();
-	while(枚举点tmp所有的出边){
-		删除该边
-		d[j]--; // 指向的点入度减一
-		if(d[j] == 0) q.push_back(j);
-	}
-}
-```
+
+每次选择入度为0的点加入拓扑序列，并将它的出边删除，直到所有点都被加入拓扑序列或者没有入度为0的点了，如果所有点都被加入了拓扑序列，则说明图中没有环，否则说明图中有环
+
 == 最短路
+
 - 稠密图：朴素 Dijkstra $O(n^2)$
 - 稀疏图：堆优化 Dijkstra $O(m log n)$
 - 负边权：Bellman-Ford $O(n m)$

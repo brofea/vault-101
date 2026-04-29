@@ -44,73 +44,39 @@ $ f(i,j)=max(f(i-1,j),max_(k=1)^(k→n) (f(i-1,j-w_i^k)+v_i^k)) $
 == 序列问题
 
 *最长上升子序列（LIS）*
+
+子序列是数组中不连续的一段，维护一个数组 $d$，$d[i]$ 表示长度为 $i$ 的上升子序列的末尾元素的最小值
+
+- 若一个元素 $a[i]$ 大于 $d["len"]$，则 $d[++"len"] = a[i]$
+- 否则在 $d$ 中二分找到第一个大于等于 $a[i]$ 的位置 $"pos"$，更新 $d["pos"] = a[i]$
+
+最后答案是 $"len"$，最长上升子序列即 $d$ 数组，代码实现如下
+
 ```cpp
-int n, res=0, a[N], dp[N];
-int main() {
-	cin >> n;
-	for(int i = 0; i < n; i++)
-		cin >> a[i];
-	for(int i = 0; i < N; i++)
-		dp[i] = 1;
-	for(int i = 1; i < n; i++)
-		for(int j = 0; j < i; j++)
-			if(a[j] < a[i])
-				dp[i] = max(dp[i], dp[j] + 1);
-	for(int i = 0; i < n; i++)
-		res = max(res, dp[i]);
-	cout << res << endl;
+vector<int> d;
+for (int i = 1; i <= n; ++i) {
+  if (d.empty() || a[i] > d.back())
+    d.push_back(a[i]);
+  else
+    *lower_bound(d.begin(), d.end(), a[i]) = a[i];
 }
 ```
 
 *最长公共子序列（LCS）*
 
-两个排列的 LCS 就是 LIS
-```cpp
-const int N = 1e5 + 10;
-// amp 表示 a 序列的值在 a 序列中的位置
-int n, amp[N], b[N], f[N];
-int main() {
-  memset(f, 0x3f, sizeof(f));
-  int x;
-  cin >> n;
-  for (int i = 1; i <= n; i++) cin >> x, amp[x] = i;
-  for (int i = 1; i <= n; i++) cin >> b[i];
-  int res = 0, t;
-  f[0] = 0;
-  for (int i = 1; i <= n; i++) {
-    if (amp[b[i]] > f[res]) {
-      f[++res] = amp[b[i]];
-    } else {
-      t = lower_bound(f + 1, f + res + 1, amp[b[i]]) - f;
-      f[t] = min(amp[b[i]], f[t]);
-    }
-  }
-  cout << res;
-}
-```
+求两个字符串 $s$ 和 $t$ 的最长公共子序列长度，子序列是字符串中不连续的一段。$f[i][j]$ 表示 $s$ 的前 $i$ 个字符和 $t$ 的前 $j$ 个字符的最长公共子序列长度，初始状态 $f[i][0]=0$ 和 $f[0][j]=0$，状态转移如下，答案是 $f[n][m]$
+
+$ f[i][j] = cases(
+  f[i-1][j-1] + 1 & comma s[i] = t[j],
+  max(f[i-1][j], f[i][j-1]) & comma s[i] != t[j]
+) $
+
 
 *最长公共上升子序列（LICS）*
 
-```cpp
-int n;
-int a[N], b[N];
-int f[N][N];
+求两个字符串 $s$ 和 $t$ 的最长上升公共子序列长度，子序列是字符串中不连续的一段。$f[i][j]$ 表示 $s$ 的前 $i$ 个字符和 $t$ 的前 $j$ 个字符的最长上升公共子序列长度，初始状态 $f[i][0]=0$ 和 $f[0][j]=0$，状态转移如下，答案是 $f[n][m]$
 
-int main() {
-  cin >> n;
-  for (int i = 1; i <= n; i++) cin >> a[i];
-  for (int i = 1; i <= n; i++) cin >> b[i];
-
-  for (int i = 1; i <= n; i++) {
-    int maxv = 1;
-    for (int j = 1; j <= n; j++) {
-      f[i][j] = f[i - 1][j];
-      if (a[i] == b[j]) f[i][j] = max(f[i][j], maxv);
-      if (a[i] > b[j]) maxv = max(maxv, f[i - 1][j] + 1);
-    }
-  }
-  int res = 0;
-  for (int i = 1; i <= n; i++) res = max(res, f[n][i]);
-  cout << res << endl;
-}
-```
+$ f[i][j] = cases(
+  f[i-1][j-1] + 1 & comma s[i] = t[j] comma s[i] > s[i-1],
+  max(f[i-1][j], f[i][j-1]) & comma s[i] != t[j]
+) $
