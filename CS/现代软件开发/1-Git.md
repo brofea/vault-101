@@ -37,3 +37,23 @@ cat ~/.ssh/id_ed25519.pub
 ```
 
 粘贴公钥到 GitHub 账户设置中的 SSH 和 GPG 密钥部分，建议命名为“主机名+系统名+用户名” 如 “T14s-Fedora-brofea”
+
+## 新建仓库
+
+第一种办法，在 GitHub 上新建一个仓库，pull 到本地：
+
+```sh
+git clone <仓库地址>
+```
+
+第二种办法，本地初始化并添加远程仓库：
+
+```sh
+# 首先进入项目文件夹
+git init
+git add .
+git commit -m "Initial commit"
+git branch -M main
+git remote add origin <仓库地址>
+git push -u origin main
+```
