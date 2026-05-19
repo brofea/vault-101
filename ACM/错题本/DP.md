@@ -1,4 +1,4 @@
-# 打A错题本：DP
+# 打A错题本：动态规划
 
 ## [CF 455 A](https://codeforces.com/problemset/problem/455/A)【AI】
 
