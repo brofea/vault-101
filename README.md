@@ -1,19 +1,32 @@
-# Vault 101
+<div align="center">
 
-这是 brofea 的个人笔记仓库，存放 CS 专业相关笔记，名字源于游戏《辐射3》，目前包含如下语言和技术栈
+<h1>Vault 101</h1>
 
-![C++](https://img.shields.io/badge/c++-%2300599C.svg?style=flat&logo=c%2B%2B&logoColor=white)
-![Python](https://img.shields.io/badge/python-3670A0?style=flat&logo=python&logoColor=ffdd54)
-![Go](https://img.shields.io/badge/go-%2300ADD8.svg?style=flat&logo=go&logoColor=white)
-![Gin](https://img.shields.io/badge/Gin-00ADD8?style=flat&logo=gin&logoColor=white)
-![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=flat&logo=openjdk&logoColor=white)
-![Spring](https://img.shields.io/badge/Spring-6DB33F?style=flat&logo=spring&logoColor=white)
+<p>
+  brofea 的笔记仓库，名字源于游戏《辐射3》
+</p>
 
+<p>
+  <img src="https://hackatime.hackclub.com/api/v1/badge/brofea/brofea/vault-101" alt="C++">
+</p>
 
-![Vue.js](https://img.shields.io/badge/vuejs-%2335495e.svg?style=flat&logo=vuedotjs&logoColor=%234FC08D)
-![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=flat&logo=html5&logoColor=white)
-![CSS](https://img.shields.io/badge/css-%23663399.svg?style=flat&logo=css&logoColor=white)
-![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=flat&logo=javascript&logoColor=%23F7DF1E)
+<p>
+  <img src="https://img.shields.io/badge/c++-%2300599C.svg?style=flat&logo=c%2B%2B&logoColor=white" alt="C++">
+  <img src="https://img.shields.io/badge/python-3670A0?style=flat&logo=python&logoColor=ffdd54" alt="Python">
+  <img src="https://img.shields.io/badge/go-%2300ADD8.svg?style=flat&logo=go&logoColor=white" alt="Go">
+  <img src="https://img.shields.io/badge/Gin-00ADD8?style=flat&logo=gin&logoColor=white" alt="Gin">
+  <img src="https://img.shields.io/badge/java-%23ED8B00.svg?style=flat&logo=openjdk&logoColor=white" alt="Java">
+  <img src="https://img.shields.io/badge/Spring-6DB33F?style=flat&logo=spring&logoColor=white" alt="Spring">
+</p>
+
+<p>
+  <img src="https://img.shields.io/badge/vuejs-%2335495e.svg?style=flat&logo=vuedotjs&logoColor=%234FC08D" alt="Vue.js">
+  <img src="https://img.shields.io/badge/html5-%23E34F26.svg?style=flat&logo=html5&logoColor=white" alt="HTML5">
+  <img src="https://img.shields.io/badge/css-%23663399.svg?style=flat&logo=css&logoColor=white" alt="CSS">
+  <img src="https://img.shields.io/badge/javascript-%23323330.svg?style=flat&logo=javascript&logoColor=%23F7DF1E" alt="JavaScript">
+</p>
+
+</div>
 
 ## 仓库结构
 
@@ -46,7 +59,7 @@
 ## 文档规范
 
 - Markdown 遵循 [markdownlint](https://github.com/DavidAnson/markdownlint) 默认规则，不使用非标准语法糖如 Obsidian 的 `[[]]`
-- 非竞赛的 C++ 代码遵循 [Google C++ Style Guide](https://google.github.io/styleguide/cppguide.html)，竞赛的 C++ 代码也大致遵循该规范，但可能出现压行等不规范写法
+- 非竞赛的 C++ 代码遵循 [Google C++ Style Guide](https://google.github.io/styleguide/cppguide.html)，竞赛的 C++ 代码稍有变化
 
 ## 快速上手
 
