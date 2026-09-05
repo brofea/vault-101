@@ -15,28 +15,30 @@
     - i-lenp+1 是匹配成功开始的位置，i 是匹配成功结束的位置
 ```cpp
 string input, s, p;
-cin >> input; s = '#' + input;
-cin >> input; p = '#' + input;
+cin >> input;
+s = '#' + input;
+cin >> input;
+p = '#' + input;
 int lenp = p.size() - 1, lens = s.size() - 1;
-vector<int> next;     // next数组的意义是，当模式串失配时，略过多少个字符
+vector<int> next;  // next数组的意义是，当模式串失配时，略过多少个字符
 next.resize(lenp + 1);
 for (int i = 2, j = 0; i <= lenp; i++) {
-  while (j && p[i] != p[j + 1])
-    j = next[j];
-  if (p[i] == p[j + 1]) 
-    j++;
-  next[i] = j;  
+    while (j && p[i] != p[j + 1])
+        j = next[j];
+    if (p[i] == p[j + 1])
+        j++;
+    next[i] = j;
 }
 for (int i = 1, j = 0; i <= lens; i++) {
-  while (j && s[i] != p[j + 1]) 
-    j = next[j];
-  if (s[i] == p[j + 1])
-    j++;
-  if (j == lenp) { 
-    j = next[j];
-    // 匹配成功后的操作
-    cout << i - lenp + 1 << endl;
-  }
+    while (j && s[i] != p[j + 1])
+        j = next[j];
+    if (s[i] == p[j + 1])
+        j++;
+    if (j == lenp) {
+        j = next[j];
+        // 匹配成功后的操作
+        cout << i - lenp + 1 << endl;
+    }
 }
 ```
 == 字典树 Trie
@@ -46,82 +48,82 @@ int son[N][26], cnt[N], idx;
 // son[][]存储树中每个节点的子节点，cnt[]存储以每个节点结尾的单词数量
 // 插入一个字符串
 void insert(char *str) {
-  in p = 0;
-  for (int i = 0; str[i]; i++) {
-    int u = str[i] - 'a';
-    if (!son[p][u])
-      son[p][u] = ++idx;
-    p = son[p][u];
-  }
-  cnt[p]++;
+    in p = 0;
+    for (int i = 0; str[i]; i++) {
+        int u = str[i] - 'a';
+        if (!son[p][u])
+            son[p][u] = ++idx;
+        p = son[p][u];
+    }
+    cnt[p]++;
 }
 // 查询字符串出现的次数
 int query(char *str) {
-  int p = 0;
-  for (int i = 0; str[i]; i++) {
-    int u = str[i] - 'a';
-    if (!son[p][u])
-      return 0;
-    p = son[p][u];
-  }
-  return cnt[p];
+    int p = 0;
+    for (int i = 0; str[i]; i++) {
+        int u = str[i] - 'a';
+        if (!son[p][u])
+            return 0;
+        p = son[p][u];
+    }
+    return cnt[p];
 }
 ```
 == AC自动机
 insert 所有模式串，调用 build 然后 find 文本串，返回匹配数量
 ```cpp
-struct Trie { // Trie树
-  int son[26], cnt, fail;
+struct Trie {  // Trie树
+    int son[26], cnt, fail;
 } tr[N];
 int tot = 0;
 // 插入模式串
-inline void insert(const string &s) { 
-  int u = 0;
-  for (int i = 0; s[i]; i++) {
-    int v = s[i] - 'a';
-    if (!tr[u].son[v])
-      tr[u].son[v] = ++tot;
-    u = tr[u].son[v];
-  }
-  tr[u].cnt++;
+inline void insert(const string &s) {
+    int u = 0;
+    for (int i = 0; s[i]; i++) {
+        int v = s[i] - 'a';
+        if (!tr[u].son[v])
+            tr[u].son[v] = ++tot;
+        u = tr[u].son[v];
+    }
+    tr[u].cnt++;
 }
 void build() {  // 构建fail边
-  queue<int> q;
-  for (int v = 0; v < 26; v++) {
-    int c = tr[0].son[v];
-    if (c) {
-      tr[c].fail = 0;
-      q.push(c);
-    }
-  }
-  while (!q.empty()) {
-    int u = q.front();
-    q.pop();
-    int f = tr[u].fail;
+    queue<int> q;
     for (int v = 0; v < 26; v++) {
-      int c = tr[u].son[v];
-      if (c) {
-        tr[c].fail = tr[f].son[v];
-        q.push(c);
-      } else
-        tr[u].son[v] = tr[f].son[v];
+        int c = tr[0].son[v];
+        if (c) {
+            tr[c].fail = 0;
+            q.push(c);
+        }
     }
-  }
+    while (!q.empty()) {
+        int u = q.front();
+        q.pop();
+        int f = tr[u].fail;
+        for (int v = 0; v < 26; v++) {
+            int c = tr[u].son[v];
+            if (c) {
+                tr[c].fail = tr[f].son[v];
+                q.push(c);
+            } else
+                tr[u].son[v] = tr[f].son[v];
+        }
+    }
 }
 // 计算模式串在文本串中出现的次数
 inline int find(const string &s) {
-  int u = 0, sum = 0;
-  for (int i = 0; s[i]; i++) {
-    int v = s[i] - 'a';
-    int c = tr[u].son[v];
-    while (c && tr[c].cnt != -1) {
-      sum += tr[c].cnt;
-      tr[c].cnt = -1;
-      c = tr[c].fail;
+    int u = 0, sum = 0;
+    for (int i = 0; s[i]; i++) {
+        int v = s[i] - 'a';
+        int c = tr[u].son[v];
+        while (c && tr[c].cnt != -1) {
+            sum += tr[c].cnt;
+            tr[c].cnt = -1;
+            c = tr[c].fail;
+        }
+        u = tr[u].son[v];
     }
-    u = tr[u].son[v];
-  }
-  return sum;
+    return sum;
 }
 ```
 
@@ -135,29 +137,29 @@ int p[N * 2], n;
 // a[]为原串，b[]为插入'#'后的新串
 // p[i]表示以b[i]为中心的回文串半径
 void init() {
-  n = strlen(a);
-  int k = 0;
-  b[k++] = '$', b[k++] = '#';
-  for (int i = 0; i < n; i++)
-    b[k++] = a[i], b[k++] = '#';
-  b[k++] = '^';
-  n = k;
+    n = strlen(a);
+    int k = 0;
+    b[k++] = '$', b[k++] = '#';
+    for (int i = 0; i < n; i++)
+        b[k++] = a[i], b[k++] = '#';
+    b[k++] = '^';
+    n = k;
 }
 void manacher() {
-  int mr = 0, mid;
-  for (int i = 1; i < n; i++) {
-    if (i < mr)
-      p[i] = min(p[mid * 2 - i], mr - i);
-    else
-      p[i] = 1;
-    while (b[i - p[i]] == b[i + p[i]])
-      p[i]++;
-    if (i + p[i] > mr) {
-      mr = i + p[i];
-      mid = i;
+    int mr = 0, mid;
+    for (int i = 1; i < n; i++) {
+        if (i < mr)
+            p[i] = min(p[mid * 2 - i], mr - i);
+        else
+            p[i] = 1;
+        while (b[i - p[i]] == b[i + p[i]])
+            p[i]++;
+        if (i + p[i] > mr) {
+            mr = i + p[i];
+            mid = i;
+        }
     }
-  }
 }
 // 最长回文串长度
-*max_element(p, p + n) - 1 
+*max_element(p, p + n) - 1
 ```

@@ -3,61 +3,69 @@
 快速排序
 ```cpp
 void quick_sort(int q[], int l, int r) {
-  if (l >= r) return;
-  int i = l - 1, j = r + 1, x = q[(l + r) >> 1];
-  // 随机选取q，用双指针法将将小于q的数放在q的左边，将大于q的数放在q右边
-  while (i < j) {
-    do i++; while (q[i] < x);
-    do j--; while (q[j] > x);
-    if (i < j) swap(q[i], q[j]);
-  }
-  // 递归完成两个区间
-  quick_sort(q, l, j), quick_sort(q, j + 1, r);
+    if (l >= r) return;
+    int i = l - 1, j = r + 1, x = q[(l + r) >> 1];
+    // 随机选取q，用双指针法将将小于q的数放在q的左边，将大于q的数放在q右边
+    while (i < j) {
+        do i++;
+        while (q[i] < x);
+        do j--;
+        while (q[j] > x);
+        if (i < j) swap(q[i], q[j]);
+    }
+    // 递归完成两个区间
+    quick_sort(q, l, j), quick_sort(q, j + 1, r);
 }
 ```
 归并排序
 ```cpp
 void merge_sort(int q[], int l, int r) {
-  static int tmp[1000000]; // 临时数组
-  if (l >= r) return;
-  int mid = (l + r) >> 1;
-  // 递归成两个区间直到区间长度为1
-  merge_sort(q, l, mid);
-  merge_sort(q, mid + 1, r);
-  // 合并区间
-  int k = 0, i = l, j = mid + 1;
-  while (i <= mid && j <= r)
-    if (q[i] <= q[j]) tmp[k ++ ] = q[i ++ ];
-    else tmp[k ++ ] = q[j ++ ];
+    static int tmp[1000000];  // 临时数组
+    if (l >= r) return;
+    int mid = (l + r) >> 1;
+    // 递归成两个区间直到区间长度为1
+    merge_sort(q, l, mid);
+    merge_sort(q, mid + 1, r);
+    // 合并区间
+    int k = 0, i = l, j = mid + 1;
+    while (i <= mid && j <= r)
+        if (q[i] <= q[j])
+            tmp[k++] = q[i++];
+        else
+            tmp[k++] = q[j++];
 
-  while (i <= mid) tmp[k ++ ] = q[i ++ ];
-  while (j <= r) tmp[k ++ ] = q[j ++ ];
+    while (i <= mid) tmp[k++] = q[i++];
+    while (j <= r) tmp[k++] = q[j++];
 
-  for (i = l, j = 0; i <= r; i ++, j ++ ) q[i] = tmp[j];
+    for (i = l, j = 0; i <= r; i++, j++) q[i] = tmp[j];
 }
 ```
 == 二分查找
 
 寻找第一个满足 check 的值
 ```cpp
-int bsearch_1(int l, int r) { 
-  while (l < r) {
-    int mid = (l + r) >> 1;
-    if (check(mid)) r = mid;
-    else l = mid + 1;
-  }
-  return l;
+int bsearch_1(int l, int r) {
+    while (l < r) {
+        int mid = (l + r) >> 1;
+        if (check(mid))
+            r = mid;
+        else
+            l = mid + 1;
+    }
+    return l;
 }
 ```
 寻找最后一个满足 check 的值
 ```cpp
 int bsearch_2(int l, int r) {
-  while (l < r) {
-    int mid = (l + r + 1) >> 1;
-    if (check(mid)) l = mid;
-    else r = mid - 1;
-  }
-  return l;
+    while (l < r) {
+        int mid = (l + r + 1) >> 1;
+        if (check(mid))
+            l = mid;
+        else
+            r = mid - 1;
+    }
+    return l;
 }
 ```
 == 高精度
@@ -65,68 +73,70 @@ int bsearch_2(int l, int r) {
 ```cpp
 // 高精加
 vector<int> add(vector<int> &A, vector<int> &B) {
-  if (A.size() < B.size()) return add(B, A);
+    if (A.size() < B.size()) return add(B, A);
 
-  vector<int> C;
-  int t = 0;
-  for (int i = 0; i < A.size(); i++ ) {
-    t += A[i];
-    if (i < B.size()) t += B[i];
-    C.push_back(t % 10);
-    t /= 10;
-  }
+    vector<int> C;
+    int t = 0;
+    for (int i = 0; i < A.size(); i++) {
+        t += A[i];
+        if (i < B.size()) t += B[i];
+        C.push_back(t % 10);
+        t /= 10;
+    }
 
-  if (t) C.push_back(t);
-  return C;
+    if (t) C.push_back(t);
+    return C;
 }
 // 高精减
 vector<int> sub(vector<int> &A, vector<int> &B) {
-  vector<int> C;
-  for (int i = 0, t = 0; i < A.size(); i++ ) {
-    t = A[i] - t;
-    if (i < B.size()) t -= B[i];
-    C.push_back((t + 10) % 10);
-    if (t < 0) t = -1;
-    else t = 0;
-  }
+    vector<int> C;
+    for (int i = 0, t = 0; i < A.size(); i++) {
+        t = A[i] - t;
+        if (i < B.size()) t -= B[i];
+        C.push_back((t + 10) % 10);
+        if (t < 0)
+            t = -1;
+        else
+            t = 0;
+    }
 
-  while (C.size() > 1 && C.back() == 0) C.pop_back();
-  return C;
+    while (C.size() > 1 && C.back() == 0) C.pop_back();
+    return C;
 }
 // 高精乘低精
 vector<int> mul(vector<int> &A, int b) {
-  vector<int> C;
+    vector<int> C;
 
-  int t = 0;
-  for (int i = 0; i < A.size() || t; i ++ ) {
-    if (i < A.size()) t += A[i] * b;
-    C.push_back(t % 10);
-    t /= 10;
-  }
+    int t = 0;
+    for (int i = 0; i < A.size() || t; i++) {
+        if (i < A.size()) t += A[i] * b;
+        C.push_back(t % 10);
+        t /= 10;
+    }
 
-  while (C.size() > 1 && C.back() == 0) C.pop_back();
+    while (C.size() > 1 && C.back() == 0) C.pop_back();
 
-  return C;
+    return C;
 }
 // 高精除低精
 vector<int> div(vector<int> &A, int b, int &r) {
-  vector<int> C;
-  r = 0;
-  for (int i = A.size() - 1; i >= 0; i -- ) {
-    r = r * 10 + A[i];
-    C.push_back(r / b);
-    r %= b;
-  }
-  reverse(C.begin(), C.end());
-  while (C.size() > 1 && C.back() == 0) C.pop_back();
-  return C;
+    vector<int> C;
+    r = 0;
+    for (int i = A.size() - 1; i >= 0; i--) {
+        r = r * 10 + A[i];
+        C.push_back(r / b);
+        r %= b;
+    }
+    reverse(C.begin(), C.end());
+    while (C.size() > 1 && C.back() == 0) C.pop_back();
+    return C;
 }
 ```
 == 位运算
 返回 x 的最低位 1 包括后面的 0
 ```cpp
 int lowbit(int x) {
-  return x & -x;
+    return x & -x;
 }
 ```
 

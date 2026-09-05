@@ -55,10 +55,10 @@ $ f(i,j)=max(f(i-1,j),max_(k=1)^(k→n) (f(i-1,j-w_i^k)+v_i^k)) $
 ```cpp
 vector<int> d;
 for (int i = 1; i <= n; ++i) {
-  if (d.empty() || a[i] > d.back())
-    d.push_back(a[i]);
-  else
-    *lower_bound(d.begin(), d.end(), a[i]) = a[i];
+    if (d.empty() || a[i] > d.back())
+        d.push_back(a[i]);
+    else
+        *lower_bound(d.begin(), d.end(), a[i]) = a[i];
 }
 ```
 

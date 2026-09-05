@@ -38,7 +38,7 @@
   brofea 
 ])
 #align(center, text(12pt)[
-  2026.4.29 Update
+  2026.9.5 Update
 ])
 #outline()
 #pagebreak()
