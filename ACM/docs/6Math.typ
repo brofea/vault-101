@@ -32,31 +32,20 @@ $
 
 == 质因数
 === 质数筛
-埃氏筛
-```cpp
-// 找到0-n的所有质数
-vector<bool> isPrime(n + 1, 1);
-isPrime[1] = 0, isPrime[0] = 0;
-int e = sqrt(n);
-for (int i = 2; i <= e; i++)
-    if (isPrime[i] == 1)
-        for (int j = i + i; j <= n; j += i)
-            isPrime[j] = 0;
-```
 线性筛 / 欧拉筛
 ```cpp
-vector<int> isPrime(n + 1, 1);
+const int N = 2e5 + 10;
+vector<int> isPrime(N + 1, 1);
 vector<int> primes;
-isPrime[0] = isPrime[1] = 0;
-for (int i = 2; i <= n; i++) {
-    if (isPrime[i])
-        primes.push_back(i);
-    for (int k : primes) {
-        if (i * k > n)
-            break;
-        isPrime[i * k] = 0;
-        if (i % k == 0)
-            break;
+void init() {
+    isPrime[0] = isPrime[1] = 0;
+    for (int i = 2; i <= N; ++i) {
+        if (isPrime[i]) primes.push_back(i);
+        for (int k : primes) {
+            if (i * k > N) break;
+            isPrime[i * k] = 0;
+            if (i % k == 0) break;
+        }
     }
 }
 ```
