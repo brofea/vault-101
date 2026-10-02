@@ -14,31 +14,30 @@
     - 匹配成功后可以进行一些操作，例如输出匹配成功的位置
     - i-lenp+1 是匹配成功开始的位置，i 是匹配成功结束的位置
 ```cpp
-string input, s, p;
-cin >> input;
-s = '#' + input;
-cin >> input;
-p = '#' + input;
-int lenp = p.size() - 1, lens = s.size() - 1;
-vector<int> next;  // next数组的意义是，当模式串失配时，略过多少个字符
-next.resize(lenp + 1);
-for (int i = 2, j = 0; i <= lenp; i++) {
-    while (j && p[i] != p[j + 1])
-        j = next[j];
-    if (p[i] == p[j + 1])
-        j++;
-    next[i] = j;
-}
-for (int i = 1, j = 0; i <= lens; i++) {
-    while (j && s[i] != p[j + 1])
-        j = next[j];
-    if (s[i] == p[j + 1])
-        j++;
-    if (j == lenp) {
-        j = next[j];
-        // 匹配成功后的操作
-        cout << i - lenp + 1 << endl;
+// 返回模式串的 next 数组
+vector<int> get_next(const string& p) {
+    vector<int> nxt(p.size());
+    for (int i = 1, j = 0; i < p.size(); ++i) {
+        while (j && p[i] != p[j]) j = nxt[j - 1];
+        if (p[i] == p[j]) ++j;
+        nxt[i] = j;
     }
+    return nxt;
+}
+// 返回模式串 p 在文本串 s 中所有匹配位置，下标从 0 开始
+vector<int> kmp(const string& s, const string& p) {
+    vector<int> nxt = get_next(p), res;
+    if (p.empty()) return res;
+
+    for (int i = 0, j = 0; i < s.size(); ++i) {
+        while (j && s[i] != p[j]) j = nxt[j - 1];
+        if (s[i] == p[j]) ++j;
+        if (j == p.size()) {
+            res.push_back(i - p.size() + 1);
+            j = nxt[j - 1];
+        }
+    }
+    return res;
 }
 ```
 == 字典树 Trie

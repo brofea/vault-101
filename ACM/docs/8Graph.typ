@@ -24,138 +24,59 @@ memset(h, -1, sizeof h);  // 记得初始化
 - 多源汇：Floyd $O(n^3)$
 
 === 朴素 Dijkstra
-
-临接矩阵模板
 ```cpp
-int g[N][N];  // 存储每条边
-int dist[N];  // 存储1号点到每个点的最短距离
-bool st[N];   // 存储每个点的最短路是否已经确定
-
-// 求1号点到n号点的最短路，如果不存在则返回-1
-int dijkstra() {
-    memset(dist, 0x3f, sizeof dist);
-    dist[1] = 0;
-
-    for (int i = 0; i < n - 1; i++) {
-        int t = -1;  // 在还未确定最短路的点中，寻找距离最小的点
-        for (int j = 1; j <= n; j++)
-            if (!st[j] && (t == -1 || dist[t] > dist[j]))
-                t = j;
-
-        // 用t更新其他点的距离
-        for (int j = 1; j <= n; j++)
-            dist[j] = min(dist[j], dist[t] + g[t][j]);
-
-        st[t] = true;
-    }
-
-    if (dist[n] == 0x3f3f3f3f)
-        return -1;
-    return dist[n];
-}
-```
-临接表模板
-```cpp
-#include <bits/stdc++.h>
-using namespace std;
-const int N = 1e4 + 5;  // 最大点数
-const int M = 5e5 + 5;  // 最大边数
-// 邻接表
-int head[N], ver[M];   // 表头 边的终点
-int edge[M], Next[M];  // 边的权值 下一条边的编号
-int idx = 0;
-void add(int u, int v, int w) {
-    ver[idx] = v;
-    edge[idx] = w;
-    Next[idx] = head[u];
-    head[u] = idx++;
-}
-// Dijkstra
-int dis[N], parent[N];  // 距离数组 父节点
-bool vis[N];            // 是否已经是最短路径
-int main() {
-    // 初始化
-    memset(head, -1, sizeof head);
-    memset(dis, 0x3f, sizeof dis);
-    memset(vis, false, sizeof vis);
-    // 输入
-    int n, m, s;  // 点数 边数 起点
-    cin >> n >> m >> s;
-    for (int i = 0; i < m; i++) {
-        int u, v, w;
-        cin >> u >> v >> w;
-        add(u, v, w);
-    }
-    // Dijkstra
+vector<vector<pair<int, int>>> e;
+// e[u] 中 {v, w} 表示 u -> v，边权为 w
+vector<int> dijkstra(int s) {
+    int n = e.size();
+    const int INF = 4e18;
+    vector<int> dis(n, INF);
+    vector<bool> vis(n, false);
     dis[s] = 0;
-    for (int i = 0; i < n - 1; i++) {  // 循环到n-1即可
-        // 1、找到vis为false，距离dis最小的点
-        int t = -1;
-        for (int j = 1; j <= n; j++)
-            if (vis[j] == false && (t == -1 || dis[j] < dis[t]))
-                t = j;
-        // 2、记录点t已经是最短路
-        if (t == -1)
-            break;
-        vis[t] = true;
-        // 3、用点t更新其他点的距离
-        int it = head[t];
-        while (it != -1) {
-            int nx = ver[it];  // 由点t为起点的边下一个点
-            dis[nx] = min(dis[nx], dis[t] + edge[it]);
-            it = Next[it];
-        }
+    for (int i = 0; i < n; ++i) {
+        int u = -1;
+        // 找当前未确定的、距离最小的点
+        for (int j = 0; j < n; ++j)
+            if (!vis[j] && (u == -1 || dis[j] < dis[u]))
+                u = j;
+        if (u == -1 || dis[u] == INF) break;
+        vis[u] = true;
+        for (auto [v, w] : e[u])
+            if (dis[v] > dis[u] + w)
+                dis[v] = dis[u] + w;
     }
-    // 输出答案
-    for (int i = 1; i <= n; i++) {
-        if (dis[i] != 0x3f3f3f3f)
-            cout << dis[i] << ' ';
-        else
-            cout << INT_MAX << ' ';
-    }
-    cout << endl;
+    return dis;
 }
 ```
-
 === 堆优化 Dijkstra
-临接表模板
 ```cpp
-int n;                                 // 点的数量
-int h[N], w[N], e[N], ne[N], idx = 0;  // 邻接表存储所有边
-int dist[N];                           // 存储所有点到1号点的距离
-bool st[N];                            // 存储每个点的最短距离是否已确定
-
-// 求1号点到n号点的最短距离，如果不存在，则返回-1
-int dijkstra() {
-    // 初始化 dis 数组全为正无限，初始化起点的 dis 为 0
-    memset(dist, 0x3f, sizeof dist);
-    dist[1] = 0;
-    priority_queue<PII, vector<PII>, greater<PII>> heap;
-    heap.push({0, 1});  // first存储距离，second存储节点编号
-
-    while (heap.size()) {
-        // 寻找未确定最短路的点中的 dis 最小的点，记为 t
-        auto t = heap.top();
-        heap.pop();
-        int ver = t.second, distance = t.first;
-        // 如果 t 的最短路已经确定，则跳过
-        if (st[ver])
-            continue;
-        // 将 t 的最短路设为已确定
-        st[ver] = true;
-        // 更新 t 的所有出边
-        for (int i = h[ver]; i != -1; i = ne[i]) {
-            int j = e[i];
-            if (dist[j] > distance + w[i]) {
-                dist[j] = distance + w[i];
-                heap.push({dist[j], j});
+vector<vector<pair<int, int>>> e;
+// e[u] 中 {v, w} 表示 u -> v，边权为 w
+vector<long long> dijkstra(int s) {
+    int n = e.size();
+    const long long INF = 4e18;
+    vector<long long> dis(n, INF);
+    // {距离, 节点}
+    priority_queue<
+        pair<long long, int>,
+        vector<pair<long long, int>>,
+        greater<pair<long long, int>>
+    > q;
+    dis[s] = 0;
+    q.push({0, s});
+    while (!q.empty()) {
+        auto [d, u] = q.top();
+        q.pop();
+        // 旧状态直接跳过
+        if (d != dis[u]) continue;
+        for (auto [v, w] : e[u]) {
+            if (dis[v] > dis[u] + w) {
+                dis[v] = dis[u] + w;
+                q.push({dis[v], v});
             }
         }
     }
-
-    if (dist[n] == 0x3f3f3f3f)
-        return -1;
-    return dist[n];
+    return dis;
 }
 ```
 === Bellman-Ford
